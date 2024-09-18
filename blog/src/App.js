@@ -5,7 +5,7 @@ import {useState} from "react";
 function App() {
 
     let post = '리액트 글내용';
-    let [글제목,b] = useState( ['리액트 글제목', '리액트 글제목1' , '리액트 글제목2']);
+    let [글제목,글제목변경] = useState( ['리액트 글제목', '리액트 글제목1' , '리액트 글제목2']);
 
     let [좋아요 , 좋아요변경] = useState(0);
 
@@ -30,6 +30,27 @@ function App() {
 
           </div>
 
+            <button onClick={()=>{
+
+                let copy2 = [...글제목];
+
+                copy2.sort();
+
+                글제목변경(copy2)
+
+            }}>가나다순정렬</button>
+
+          <button onClick={ ()=>{
+
+            let copy = [...글제목];
+            copy[0] = '제목변경함';
+
+            글제목변경(copy);
+
+          }
+          }>글 수정</button>
+
+
           <div className="list">
               <h4> {글제목[0]} <span onClick={ () => { 좋아요변경(좋아요+1)} }> 👍 </span> {좋아요} </h4>
               <p> 2월 17일 발행</p>
@@ -49,11 +70,26 @@ function App() {
 
           </div>
 
+        <Modal></Modal>
 
-          <h4> {post} </h4>
 
       </div>
   );
 }
+
+    function Modal(){
+        return (
+
+            <div className={"modal"}>
+                <h4>제목</h4>
+                <p>날짜</p>
+                <p>상세내용</p>
+            </div>
+
+        )
+
+
+    }
+
 
 export default App;
